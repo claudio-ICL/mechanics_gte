@@ -1,0 +1,7 @@
+./implementation/data/*
+./implementation/*
+./paper/figures/*
+./paper/qfsubmission/figures/*
+./implementation/__pycache__/*
+./implementation/*AAPL*
+
