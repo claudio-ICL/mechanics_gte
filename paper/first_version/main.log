@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.29)  1 JUN 2020 09:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.29)  2 JUN 2020 12:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**gte.tex
-(./gte.tex
+**main.tex
+(./main.tex
 LaTeX2e <2017-04-15>
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -23,10 +23,7 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-\@input{header.aux}
-\openout2 = `header.aux'.
-
-(./header.tex (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2015/03/17 v1.2c Input encoding file
 \inpenc@prehook=\toks14
 \inpenc@posthook=\toks15
@@ -955,9 +952,9 @@ File: tikzlibrarybackgrounds.code.tex 2013/07/18 v3.0.1a (rcs-revision 1.3)
 \pgf@layerboxsaved@background=\box64
 )
 \c@thm=\count130
-)
-\@input{notation_gte.aux}
-\openout2 = `notation_gte.aux'.
+
+\@input{./notation_gte.aux}
+\openout2 = `./notation_gte.aux'.
 
 (./notation_gte.tex
 (/usr/share/texlive/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
@@ -1320,32 +1317,32 @@ Package: xfrac 2018/02/21 L3 Experimental split-level fractions
 .................................................
 )
 \@indexfile=\write4
-\openout4 = `gte.idx'.
+\openout4 = `main.idx'.
 
 
-Writing index file gte.idx
-(./gte.aux)
-\openout1 = `gte.aux'.
+Writing index file main.idx
+(./main.aux)
+\openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 5.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 5.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 64.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 64.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 5.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 64.
 
 (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -1358,14 +1355,14 @@ File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(71.13188pt, 455.24411pt, 71.13188pt)
+* h-part:(L,W,R)=(85.35826pt, 369.88583pt, 142.26378pt)
 * v-part:(T,H,B)=(101.40665pt, 591.5302pt, 152.11pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
-* \textwidth=455.24411pt
+* \textwidth=369.88583pt
 * \textheight=591.5302pt
-* \oddsidemargin=-1.1381pt
-* \evensidemargin=-1.1381pt
+* \oddsidemargin=13.08827pt
+* \evensidemargin=13.08827pt
 * \topmargin=-7.86334pt
 * \headheight=12.0pt
 * \headsep=25.0pt
@@ -1454,232 +1451,233 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
 ABD: EveryShipout initializing macros
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 8.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 67.
  (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 8.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 67.
+
 (/usr/share/texmf/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 8.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 67.
+
 
 (/usr/share/texmf/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 8.
+(Font)              <12> on input line 67.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 8.
+(Font)              <8> on input line 67.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 8.
-LaTeX Font Info:    Try loading font information for U+msa on input line 8.
+(Font)              <6> on input line 67.
+LaTeX Font Info:    Try loading font information for U+msa on input line 67.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 8.
+LaTeX Font Info:    Try loading font information for U+msb on input line 67.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+esint on input line 8.
+LaTeX Font Info:    Try loading font information for U+esint on input line 67.
 
 (/usr/share/texlive/texmf-dist/tex/latex/esint/uesint.fd
 File: uesint.fd 
 )
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 8.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 67.
 
 (/usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Try loading font information for TS1+lmr on input line 8.
+LaTeX Font Info:    Try loading font information for TS1+lmr on input line 67.
 
 (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 8.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 39.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 39.
+(Font)              <5> on input line 67.
  [1
 
 
 
-
-
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-<figures/aPosterioriTwoVolatilities.jpg, id=20, 702.625pt x 979.66pt>
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 98.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 98.
+ [2]
+<figures/aPosterioriTwoVolatilities.jpg, id=30, 702.625pt x 979.66pt>
 File: figures/aPosterioriTwoVolatilities.jpg Graphic file (type jpg)
 <use figures/aPosterioriTwoVolatilities.jpg>
 Package pdftex.def Info: figures/aPosterioriTwoVolatilities.jpg  used on input 
-line 62.
-(pdftex.def)             Requested size: 227.62206pt x 317.36925pt.
- [2] [3 <./figures/aPosterioriTwoVolatilities.jpg>] [4]
-LaTeX Font Info:    Try loading font information for U+euf on input line 104.
+line 121.
+(pdftex.def)             Requested size: 184.94292pt x 257.85971pt.
+ [3 <./figures/aPosterioriTwoVolatilities.jpg>] [4]
+LaTeX Font Info:    Try loading font information for U+euf on input line 208.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 )
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 104
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 208
 .
 
 (/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [5] [6] [7] [8] [9] [10] [11]
-[12] [13] [14] [15] [16]
-Overfull \hbox (7.96732pt too wide) in paragraph at lines 676--678
+) [5]
+Overfull \hbox (1.75314pt too wide) in paragraph at lines 262--264
+\OT1/lmr/m/n/10 Among ad-mis-si-ble in-ven-tory tra-jec-to-ries we dis-tin-guis
+h those that are fuel-constrained,
+ []
+
+[6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17]
+Overfull \hbox (20.57619pt too wide) in paragraph at lines 780--782
 \OT1/lmr/m/n/10 In par-tic-u-lar, mar-tin-gale dy-nam-ics fall in the model cla
-ss $[][]$. We let $[][] := [][] \OMS/lmsy/m/n/10 n
+ss $[][]$. We let $[][] :=
  []
 
+[18] [19]
 
-Overfull \hbox (2.57782pt too wide) in paragraph at lines 676--678
-[][]$ \OT1/lmr/m/n/10 be the col-lec-tion of mod-els in $[][]$ with ran-dom dri
-ft. Sim-i-larly, we let $[][] :=
- []
-
-[17]
-
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 778.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 882.
 
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 779.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 883.
 
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 780.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 884.
 
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 782.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 886.
 
 
-[18] [19] [20] [21] [22] [23] [24] [25] [26]
-LaTeX Font Info:    Try loading font information for OT1+lmss on input line 130
-1.
+[20] [21] [22] [23] [24] [25] [26] [27] [28] [29]
+LaTeX Font Info:    Try loading font information for OT1+lmss on input line 140
+6.
 
 (/usr/share/texmf/tex/latex/lm/ot1lmss.fd
 File: ot1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [27] [28]
-<figures/AAPL_2019-01-29.png, id=129, 1308.89pt x 512.91624pt>
+) [30]
+Overfull \hbox (11.37247pt too wide) in paragraph at lines 1481--1508
+ [][] 
+ []
+
+[31]
+<figures/AAPL_2019-01-29.png, id=140, 1308.89pt x 512.91624pt>
 File: figures/AAPL_2019-01-29.png Graphic file (type png)
 <use figures/AAPL_2019-01-29.png>
-Package pdftex.def Info: figures/AAPL_2019-01-29.png  used on input line 1427.
-(pdftex.def)             Requested size: 450.69417pt x 176.61192pt.
- [29]
-<figures/aBM_30d12h24m_invAndPrice.png, id=135, 1308.89pt x 567.11874pt>
+Package pdftex.def Info: figures/AAPL_2019-01-29.png  used on input line 1532.
+(pdftex.def)             Requested size: 366.189pt x 143.49817pt.
+ [32 <./figures/AAPL_2019-01-29.png>]
+<figures/aBM_30d12h24m_invAndPrice.png, id=146, 1308.89pt x 567.11874pt>
 File: figures/aBM_30d12h24m_invAndPrice.png Graphic file (type png)
 <use figures/aBM_30d12h24m_invAndPrice.png>
 Package pdftex.def Info: figures/aBM_30d12h24m_invAndPrice.png  used on input l
-ine 1452.
-(pdftex.def)             Requested size: 450.69417pt x 195.27542pt.
-<figures/aBM_30d12h24m_terminalTrait.png, id=136, 546.04pt x 294.09875pt>
+ine 1557.
+(pdftex.def)             Requested size: 366.189pt x 158.66235pt.
+<figures/aBM_30d12h24m_terminalTrait.png, id=147, 546.04pt x 294.09875pt>
 File: figures/aBM_30d12h24m_terminalTrait.png Graphic file (type png)
 <use figures/aBM_30d12h24m_terminalTrait.png>
 Package pdftex.def Info: figures/aBM_30d12h24m_terminalTrait.png  used on input
- line 1454.
-(pdftex.def)             Requested size: 227.62206pt x 122.59618pt.
-
-Overfull \hbox (28.45277pt too wide) in paragraph at lines 1454--1455
-[]|[]| 
- []
-
+ line 1559.
+(pdftex.def)             Requested size: 184.94292pt x 99.6108pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 1457.
+(Font)              <9> on input line 1562.
 
-Overfull \hbox (44.66347pt too wide) in paragraph at lines 1457--1468
+Overfull \hbox (44.66347pt too wide) in paragraph at lines 1562--1573
 []|[]| 
  []
 
 
-Overfull \hbox (7.45006pt too wide) in paragraph at lines 1449--1471
+Overfull \hbox (8.30316pt too wide) in paragraph at lines 1554--1576
  [][] 
  []
 
-<figures/aBM_terminationTime_hist.png, id=137, 548.0475pt x 457.71pt>
+[33 <./figures/aBM_30d12h24m_invAndPrice.png> <./figures/aBM_30d12h24m_terminal
+Trait.png>]
+<figures/aBM_terminationTime_hist.png, id=154, 548.0475pt x 457.71pt>
 File: figures/aBM_terminationTime_hist.png Graphic file (type png)
 <use figures/aBM_terminationTime_hist.png>
 Package pdftex.def Info: figures/aBM_terminationTime_hist.png  used on input li
-ne 1510.
-(pdftex.def)             Requested size: 216.24373pt x 180.60141pt.
-<figures/aBM_errorLiquidation_hist.png, id=138, 521.95pt x 457.71pt>
+ne 1615.
+(pdftex.def)             Requested size: 175.69803pt x 146.73558pt.
+<figures/aBM_errorLiquidation_hist.png, id=155, 521.95pt x 457.71pt>
 File: figures/aBM_errorLiquidation_hist.png Graphic file (type png)
 <use figures/aBM_errorLiquidation_hist.png>
 Package pdftex.def Info: figures/aBM_errorLiquidation_hist.png  used on input l
-ine 1512.
-(pdftex.def)             Requested size: 204.85846pt x 179.64459pt.
-[30 <./figures/AAPL_2019-01-29.png>] [31 <./figures/aBM_30d12h24m_invAndPrice.p
-ng> <./figures/aBM_30d12h24m_terminalTrait.png>] [32 <./figures/aBM_termination
-Time_hist.png> <./figures/aBM_errorLiquidation_hist.png>] [33]
-<figures/BUNDESREPUB_BO.png, id=158, 970.62625pt x 622.325pt>
+ine 1617.
+(pdftex.def)             Requested size: 166.4475pt x 145.96036pt.
+ [34 <./figures/aBM_terminationTime_hist.png> <./figures/aBM_errorLiquidation_h
+ist.png>] [35]
+<figures/BUNDESREPUB_BO.png, id=164, 970.62625pt x 622.325pt>
 File: figures/BUNDESREPUB_BO.png Graphic file (type png)
 <use figures/BUNDESREPUB_BO.png>
-Package pdftex.def Info: figures/BUNDESREPUB_BO.png  used on input line 1558.
-(pdftex.def)             Requested size: 409.71692pt x 262.69464pt.
-<figures/bridge_1d16h3m_invAndPrice.png, id=159, 1257.69875pt x 567.11874pt>
-File: figures/bridge_1d16h3m_invAndPrice.png Graphic file (type png)
-<use figures/bridge_1d16h3m_invAndPrice.png>
-Package pdftex.def Info: figures/bridge_1d16h3m_invAndPrice.png  used on input 
-line 1601.
-(pdftex.def)             Requested size: 450.69417pt x 203.21935pt.
+Package pdftex.def Info: figures/BUNDESREPUB_BO.png  used on input line 1663.
+(pdftex.def)             Requested size: 332.89499pt x 213.43939pt.
 
-Overfull \hbox (7.45006pt too wide) in paragraph at lines 1600--1613
+Overfull \hbox (55.40486pt too wide) in paragraph at lines 1662--1680
  [][] 
  []
 
-[34 <./figures/BUNDESREPUB_BO.png>] [35 <./figures/bridge_1d16h3m_invAndPrice.p
-ng>] [36] [37] [38] [39] [40] [41] (./gte.bbl [42])
-Overfull \hbox (19.17035pt too wide) in paragraph at lines 2153--2153
-[]\OT1/lmr/bx/n/14.4 Euler-Lagrange equa-tions in the pres-ence of a (rough)
+<figures/bridge_1d16h3m_invAndPrice.png, id=165, 1257.69875pt x 567.11874pt>
+File: figures/bridge_1d16h3m_invAndPrice.png Graphic file (type png)
+<use figures/bridge_1d16h3m_invAndPrice.png>
+Package pdftex.def Info: figures/bridge_1d16h3m_invAndPrice.png  used on input 
+line 1706.
+(pdftex.def)             Requested size: 366.189pt x 165.11789pt.
+
+Overfull \hbox (8.30316pt too wide) in paragraph at lines 1705--1718
+ [][] 
  []
 
-[43] [44] [45] [46] [47] [48] (./gte.aux) ) 
+[36 <./figures/BUNDESREPUB_BO.png>] [37 <./figures/bridge_1d16h3m_invAndPrice.p
+ng>] [38] [39] [40] [41] [42] [43] (./main.bbl [44] [45]) [46] [47] [48]
+[49] [50] [51] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 26115 strings out of 492982
- 534885 string characters out of 6134896
- 589373 words of memory out of 5000000
+ 26112 strings out of 492982
+ 534870 string characters out of 6134896
+ 586329 words of memory out of 5000000
  29187 multiletter control sequences out of 15000+600000
  621006 words of font info for 104 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 59i,22n,69p,10377b,838s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm
-/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf
-/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.
-enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/
-enc/dvips/lm/lm-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/esint
--type1/esint10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/e
-uler/eufm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/eule
-r/eufm5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/euler/eu
-fm7.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fo
-nts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx5.pf
-b></usr/share/texmf/fonts/type1/public/lm/lmbx7.pfb></usr/share/texmf/fonts/typ
-e1/public/lm/lmbx9.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr
-/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/pub
-lic/lm/lmmi5.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi6.pfb></usr/share/
-texmf/fonts/type1/public/lm/lmmi7.pfb></usr/share/texmf/fonts/type1/public/lm/l
-mmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi9.pfb></usr/share/texmf/fo
-nts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb
-></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type
-1/public/lm/lmr5.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/sha
-re/texmf/fonts/type1/public/lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm
-/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fo
-nts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmri7.pf
-b></usr/share/texmf/fonts/type1/public/lm/lmri9.pfb></usr/share/texmf/fonts/typ
-e1/public/lm/lmss8.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr
-/share/texmf/fonts/type1/public/lm/lmsy5.pfb></usr/share/texmf/fonts/type1/publ
-ic/lm/lmsy7.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/t
-exmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/l
-mtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msb
-m10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm
-7.pfb>
-Output written on gte.pdf (48 pages, 1243460 bytes).
+ 55i,22n,67p,10380b,838s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc
+}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvi
+ps/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/shar
+e/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/l
+m-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/esint-type1/esint10
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/euler/eufm5.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/euler/eufm7.pfb></usr/
+share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/publ
+ic/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx5.pfb></usr/share/
+texmf/fonts/type1/public/lm/lmbx7.pfb></usr/share/texmf/fonts/type1/public/lm/l
+mbx9.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/f
+onts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi5.p
+fb></usr/share/texmf/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf/fonts/ty
+pe1/public/lm/lmmi7.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr
+/share/texmf/fonts/type1/public/lm/lmmi9.pfb></usr/share/texmf/fonts/type1/publ
+ic/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/t
+exmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lm
+r5.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts
+/type1/public/lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></us
+r/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/publ
+ic/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmri7.pfb></usr/share/
+texmf/fonts/type1/public/lm/lmri9.pfb></usr/share/texmf/fonts/type1/public/lm/l
+mss8.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/f
+onts/type1/public/lm/lmsy5.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy7.pf
+b></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/typ
+e1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on main.pdf (51 pages, 1248233 bytes).
 PDF statistics:
- 334 PDF objects out of 1000 (max. 8388607)
- 230 compressed objects within 3 object streams
+ 344 PDF objects out of 1000 (max. 8388607)
+ 237 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  53 words of extra memory for PDF output out of 10000 (max. 10000000)
 

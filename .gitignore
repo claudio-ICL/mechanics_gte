@@ -1,7 +1,9 @@
-./implementation/data/*
-./implementation/*
-./paper/figures/*
-./paper/qfsubmission/figures/*
-./implementation/__pycache__/*
-./implementation/*AAPL*
-
+implementation/data/*
+implementation/*
+paper/figures/*
+paper/*/figures/*
+implementation/__pycache__/*
+implementation/*AAPL*
+**aBM_*
+**.aux
+**.png

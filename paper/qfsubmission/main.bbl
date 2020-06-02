@@ -1,0 +1,100 @@
+\begin{thebibliography}{BMKO18}
+
+\bibitem[AC00]{AC00opt}
+R.~F. Almgren and N.~Chriss.
+\newblock Optimal execution of portfolio transactions.
+\newblock {\em Journal of Risk}, 3(2):5--39, 2000.
+
+\bibitem[BBDN18]{BBDN18sta}
+Claudio Bellani, Damiano Brigo, Alex Done, and Eyal Neuman.
+\newblock Static vs adaptive strategies for optimal execution with signals.
+\newblock {\em arXiv preprint arXiv:1811.11265}, 2018.
+
+\bibitem[BDG14]{BD14opt}
+Damiano Brigo and Giuseppe Di~Graziano.
+\newblock Optimal trade execution under displaced diffusions dynamics across
+  different risk criteria.
+\newblock {\em Journal of Financial Engineering}, 1(2):1450018, 2014.
+
+\bibitem[BL98]{BL98opt}
+Dimitris Bertsimas and Andrew~W Lo.
+\newblock Optimal control of execution costs.
+\newblock {\em Journal of Financial Markets}, 1(1):1--50, 1998.
+
+\bibitem[BL15]{BL15opt}
+Kyle Bechler and Michael Ludkovski.
+\newblock Optimal execution with dynamic order flow imbalance.
+\newblock {\em SIAM Journal on Financial Mathematics}, 6(1):1123--1151, 2015.
+
+\bibitem[BMKO18]{BMO18opt}
+Christoph Belak, Johannes Muhle-Karbe, and Kevin Ou.
+\newblock Optimal trading with general signals and liquidation in target zone
+  models.
+\newblock {\em arXiv preprint arXiv:1808.00515}, August 2018.
+
+\bibitem[Boy70]{Boy70sto}
+William~M. Boyce.
+\newblock Stopping rules for selling bonds.
+\newblock {\em The Bell Journal of Economics and Management Science},
+  1(1):27--53, 1970.
+
+\bibitem[BP18]{BP18sta}
+Damiano Brigo and Cl{\'e}ment Piat.
+\newblock Static versus adapted optimal execution strategies in two benchmark
+  trading models.
+\newblock {\em World Scientific Book Chapters}, pages 239--273, 2018.
+
+\bibitem[CDJ17]{CDJ17alg}
+\'{A}lvaro Cartea, Ryan Donnelly, and Sebastian Jaimungal.
+\newblock Algorithmic trading with model uncertainty.
+\newblock {\em SIAM J. Financial Math.}, 8(1):635--671, 2017.
+
+\bibitem[CJ16]{CJ16inc}
+\'{A}lvaro Cartea and Sebastian Jaimungal.
+\newblock Incorporating order-flow into optimal execution.
+\newblock {\em Math. Financ. Econ.}, 10(3):339--364, 2016.
+
+\bibitem[CJ19a]{CJ19alg}
+Philippe Casgrain and Sebastian Jaimungal.
+\newblock Algorithmic trading in competitive markets with mean field games.
+\newblock {\em SIAM News}, 52(2):1--2, 2019.
+
+\bibitem[CJ19b]{CJ19tra}
+Philippe Casgrain and Sebastian Jaimungal.
+\newblock Trading algorithms with learning in latent alpha models.
+\newblock {\em Math. Finance}, 29(3):735--772, 2019.
+
+\bibitem[CJP15]{CJP15alg}
+Alvaro Cartea, Sebastian Jaimungal, and Jose Penalva.
+\newblock {\em Algorithmic and high-frequency trading}.
+\newblock Cambridge University Press, Cambridge, United Kingdom, 2015.
+
+\bibitem[Dac08]{Dac08dir}
+Bernard Dacorogna.
+\newblock {\em Direct methods in the calculus of variations}, volume~78 of {\em
+  Applied Mathematical Sciences}.
+\newblock Springer, New York, second edition, 2008.
+
+\bibitem[EPOH15]{ED15opt}
+David Easley, Marcos~Lopez Prado, and Maureen O'~Hara.
+\newblock Optimal execution horizon.
+\newblock {\em Mathematical Finance}, 25(3):640--672, 2015.
+
+\bibitem[GS11]{GS11opt}
+Jim Gatheral and Alexander Schied.
+\newblock {Optimal Trade Execution Under Geometric Brownian Motion In The
+  Almgren And Chriss Framework}.
+\newblock {\em International Journal of Theoretical and Applied Finance
+  (IJTAF)}, 14(03):353--368, 2011.
+
+\bibitem[HJN19]{HJN19mea}
+Xuancheng Huang, Sebastian Jaimungal, and Mojtaba Nourian.
+\newblock Mean-field game strategies for optimal execution.
+\newblock {\em Appl. Math. Finance}, 26(2):153--185, 2019.
+
+\bibitem[LN19]{LN19inc}
+Charles-Albert Lehalle and Eyal Neuman.
+\newblock Incorporating signals into optimal trading.
+\newblock {\em Finance and Stochastics}, 23(2):275--311, 2019.
+
+\end{thebibliography}
