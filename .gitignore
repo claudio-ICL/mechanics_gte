@@ -2,6 +2,7 @@ implementation/data/*
 implementation/*
 paper/figures/*
 paper/*/figures/*
+paper/**.aux
 implementation/__pycache__/*
 implementation/*AAPL*
 **aBM_*

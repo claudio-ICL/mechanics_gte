@@ -1,6 +1,6 @@
 \documentclass[10pt,a4paper]{article}
 \include{header}
-\include{notation_gte}
+\include{notation}
 \makeindex
 \begin{document}
 \numberwithin{equation}{section}
@@ -225,7 +225,7 @@ $\lagrangian$ that does not depend on $\fundamentalPrice$. Assume  that there ex
 \begin{equation*}
 \abs{\lagrangian (t,q,r)} \leq \alpha(t) + \beta \left(q\squared + r \squared \right).
 \end{equation*}
-Let the price process $\fundamentalPrice$ be a totally square integrable canonical semimartingale with canonical decomposition  
+Let the price process $\fundamentalPrice$ be a totally square integrable continuous canonical semimartingale with canonical decomposition  
 \begin{equation}\label{eq.evolutionOfFundamentalPrice}
 \fundamentalPrice_t = \boundedVariationPart_t + \martingale_t.
 \end{equation}
@@ -1106,47 +1106,13 @@ The general solution to equation \eqref{eq.ODEforExpectedInventory} is
 
 
 \subsection{Applications}\label{sec.applications}
+In this section we given three applications of the trading schedule proposed in Proposition \ref{prop.goodExecutionIC}.
+
 
 \subsubsection{Intraday stock price: brownian motion}
-In this  paragraph, we give an application of the trading schedule proposed in Section \ref{sec.goodTradeExecutions} to the case of liquidation of shares traded on a limit order book. As an example, we consider shares of Apple Inc. (AAPL) traded on the NASDAQ order book. In this example the price process is the arithmetic Brownian motion; this is the benchmark for optimal trade execution since the seminal paper by Almgren and Chriss \cite{AC00opt}. However we would like to emphasise  that the trading schedule proposed in Section \ref{sec.goodTradeExecutions} does not rely on the price process being an arithmetic Brownian motion, nor a semimartingale. More sophisticated models for the price signal can be used, in particular those encompassing rough trajectories.
+In this example, we assume that the price process is an arithmetic Brownian motion.
 
-	
-\begin{table}
-\centering
-\begin{tiny}
-	{\rowcolors{2}{blue!40!black!10}{blue!20!black!05}
-		\begin{tabular}{lrrrrrrr}
-			\textbf{date} &   \textbf{ initial.price} &    \textbf{avg.price} &     \textbf{std.price} &  \textbf{max.price} &  \textbf{min.price} &   \textbf{volatility} &    \textbf{bidVolume} \\ 
-			\hline		
-			2019-01-02 &   1.551528e+06 &  1.573641e+06 &  10609.885630 &  1588400   &  1545700   &      123.400320 &   886.197329 \\
-			2019-01-03 &   1.442540e+06 &  1.438782e+06 &   8009.646338 &  1457150   &  1420850   &       145.819047 &  1188.751986 \\
-			2019-01-04 &   1.453756e+06 &  1.471987e+06 &   7925.790647 &  1485350   &  1451850   &       109.428439 &  1291.683663 \\
-			2019-01-07 &   1.472455e+06 &  1.472358e+06 &   6105.759311 &  1488250   &  1459100   &       127.799213 &  1139.538298 \\
-			2019-01-08 &   1.490168e+06 &  1.500335e+06 &   8381.548706 &  1518150   &  1485350   &      117  70729 &  1075  23755 \\
-			2019-01-10 &   1.513191e+06 &  1.526785e+06 &   5087.848872 &  1536500   &  1511150   &       107.649766 &  1046.712111 \\
-			2019-01-11 &   1.530947e+06 &  1.522908e+06 &   4101.365889 &  1534950   &  1515150   &      90.781331 &  1317.150110 \\ 
-			2019-01-14 &   1.500257e+06 &  1.499643e+06 &   2456.131227 &  1507950   &  1492200   &     86.306946 &  1347.534461 \\
-			2019-01-15 &   1.515814e+06 &  1.523678e+06 &   5251.548539 &  1533850   &  1513200   &     95.682490 &  1164.402792 \\
-			2019-01-16 &   1.552520e+06 &  1.549901e+06 &   2568.906492 &  1557500   &  1543300   &      86.815577 &  1206.761646 \\
-			2019-01-17 &   1.537375e+06 &  1.545890e+06 &   9385.791843 &  1576450   &  1534600   &   113.691224 &  1193.393924 \\
-			2019-01-18 &   1.564948e+06 &  1.571147e+06 &   2749.642228 &  1578750   &  1562200   &       101.692620 &  1017.907481 \\
-			2019-01-22 &   1.553784e+06 &  1.547023e+06 &   6167.822659 &  1556750   &  1528750   &      103.605824 &   997.719024 \\
-			2019-01-23 &   1.546358e+06 &  1.530565e+06 &   7178.892096 &  1549850   &  1517050   &     103.526701 &  1208.373604 \\
-			2019-01-24 &   1.530342e+06 &  1.524633e+06 &   4399.450324 &  1536450   &  1517350   &    91.531719 &  1286.708610 \\
-			2019-01-25 &   1.563176e+06 &  1.570534e+06 &   4102.321246 &  1581350   &  1562250   &      86.868355 &  1235.438517 \\
-			2019-01-28 &   1.545477e+06 &  1.551820e+06 &   4811.143834 &  1562850   &  1542500   &      90.959393 &  1287.208898 \\
-			2019-01-29 &   1.573303e+06 &  1.561697e+06 &   6169  51164 &  1579750   &  1546250   &      92.804304 &  1243.846938 \\
-			2019-01-30 &   1.607729e+06 &  1.629211e+06 &  12145.157242 &  1661400   &  1602400   &     142.917517 &  1201.775358 \\
-			2019-01-31 &    1.665671e+06 &  1.677437e+06 &   6230.453616 &  1689950 &  1661900 &             106.829303 &   958.527024
-			\\
-		\end{tabular}
-	}
-\end{tiny}
-\caption{{Statistics of AAPL in January 2019. Source: LOBSTER}}
-\label{tab.statAAPLjanuary2019}
-\end{table}
-
-The data to which our model will be calibrated are summarised in Table \ref{tab.statAAPLjanuary2019}. This table reports statistics of the mid price of AAPL stock on the NASDAQ order book, as observed in the month of January 2019. For each trading day, the time window 10am-3pm is considered and the statistics on the price are based on observations in this time window. Following the conventions of the LOBSTER dataset,\footnote{https://lobsterdata.com/info/WhatIsLOBSTER.php} time is measured in seconds after midnight, and the unit of price is $1.0e-04\$$. A visual representation of the mid price and of the best bid volumes observed on January 29th is provided by Figure \ref{fig.AAPL_20190129}.
+We calibrate our model to data derived from LOBSTER.\footnote{\url{https://lobsterdata.com/info/WhatIsLOBSTER.php}.} More precisely, we consider shares of Apple Inc. (AAPL) traded on the NASDAQ order book as observed in the month of January 2019. For each trading day, we focus on the time window 10am-3pm. Time is measured in seconds after midnight, and the unit of price is $1.0e-04\$$. 
 
 Let $\brownianMotion$ be a standard one-dimensional Brownian motion and let the price process $\fundamentalPrice$ be $\fundamentalPrice_t = \fundamentalPrice_0 + \sigma \brownianMotion_t$, where $\fundamentalPrice_0$ is the mid price observed at 10am (reported in the second column of Table \ref{tab.statAAPLjanuary2019}), and $t$ denotes seconds after 10am. The volatility parameter $\sigma$ is estimated according to the formula 
 \begin{equation*}
@@ -1887,7 +1853,7 @@ We are grateful to Eyal Neuman for discussion and suggestions that helped us imp
 
 \addcontentsline{toc}{section}{References}
 \bibliographystyle{alpha}
-\bibliography{bibliography_gte}
+\bibliography{bibliography}
 
 
 
