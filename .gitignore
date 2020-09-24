@@ -1,8 +1,12 @@
 implementation/data/*
+implementation/old/*
+implementation/gte/data/*
 implementation/*
+paper/*
 paper/figures/*
 paper/*/figures/*
 paper/**.aux
+paper/qfsubmission/*
 implementation/__pycache__/*
 implementation/*AAPL*
 **aBM_*

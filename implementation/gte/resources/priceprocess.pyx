@@ -18,17 +18,17 @@ ctypedef np.float_t DTYPEf_t
 ctypedef np.cdouble_t DTYPEc_t
 
 class Price:
-    def __init__(self,lobster_midprice, keep_lobster_dollarunit=False):
-        self.get_lobster_midprice(lobster_midprice,keep_lobster_dollarunit)
-    def get_lobster_midprice(self,midprice,keep_lobster_dollarunit=False):
+    def __init__(self,lobster_midprice, DTYPEf_t horizon=1.0, keep_lobster_dollarunit=False):
+        self.get_lobster_midprice(lobster_midprice, horizon, keep_lobster_dollarunit)
+    def get_lobster_midprice(self,midprice, DTYPEf_t horizon=1.0, keep_lobster_dollarunit=False):
         self.lobster_midprice=midprice
-        self.store_data(keep_lobster_dollarunit)
+        self.store_data(horizon, keep_lobster_dollarunit)
         self.store_logprice()
-    def store_data(self, keep_lobster_dollarunit=False):
+    def store_data(self, DTYPEf_t horizon = 1.0, keep_lobster_dollarunit=False):
         cdef np.ndarray[DTYPEf_t, ndim=2] data = np.array(self.lobster_midprice.values,dtype=DTYPEf)
         #normalise and center times
         data[:,0]-= data[0,0]
-        data[:,0]/=np.amax(data[:,0])
+        data[:,0]*=horizon/np.amax(data[:,0])
         if not keep_lobster_dollarunit:
             if np.mean(data[:,1])>1.0e+04:
                 data[:,1]*=1.0e-04
@@ -37,6 +37,9 @@ class Price:
         cdef np.ndarray[DTYPEf_t, ndim=2] logprice = np.array(self.data, copy=True)
         logprice[:,1]=np.log(logprice[:,1])
         self.logprice=logprice
+    def simmetrise(self,):
+        self.ou.simmetrise()
+        self.pointprocess.simmetrise()
     def set_forecast(self,np.ndarray[DTYPEf_t, ndim=2] forecast): #tipical call: self.set_forecast(self.fourier.series_val)
         self.forecast=forecast #expected in log-scale
         cdef np.ndarray[DTYPEf_t, ndim=2] expected_trajectory = np.array(forecast, copy=True)
@@ -163,6 +166,7 @@ class Price:
             ax.plot(forecast[:,0], forecast[:,1], label='reversion_target', color='lightblue', linestyle='--', linewidth=3)
         ax.set_xlabel('time')
         ax.set_ylabel(ylabel)
+        ax.set_title('INTC mid-price on 2019-01-22')
         ax.legend()
         plt.show()
     def plot(self,DTYPEf_t t0=0.0, DTYPEf_t t1=-1.0, logscale=False, show_data=False):
@@ -196,6 +200,7 @@ class Price:
         ax.plot(forecast[:,0], forecast[:,1], color='lightblue', linestyle='--', linewidth=3, label='reversion_target')
         ax.set_xlabel('time')
         ax.set_ylabel(ylabel)
+        ax.set_title('INTC mid-price on 2019-01-22')
         ax.legend()
         plt.show()
 
@@ -224,6 +229,29 @@ class PointProcess:
     def get_data(self, np.ndarray[DTYPEf_t, ndim=2] data):
         print('PointProcess.get_data: shape=({},{})'.format(data.shape[0],data.shape[1]))
         self.data=data
+    def simmetrise(self,):
+        cdef int len_=min(len(self.pos_distrib),len(self.neg_distrib))
+        cdef np.ndarray[DTYPEf_t, ndim=2] distr = np.zeros((len_,2), dtype=DTYPEf)
+        distr[:,0]=(self.pos_distrib[:len_,0]+np.abs(self.neg_distrib[:len_,0]))/2
+        distr[:,1]=(self.pos_distrib[:len_,1]+self.neg_distrib[:len_,1])/2
+        distr[:,1]/=np.sum(distr[:,1])
+        cdef np.ndarray[DTYPEf_t, ndim=2] newpd = np.array(distr,copy=True)
+        cdef np.ndarray[DTYPEf_t, ndim=2] newnd = np.array(distr,copy=True)
+        newnd[:,0]*=-1
+        newd={'pos':newpd,'neg':newnd}
+        self.pos_distrib=newpd
+        self.neg_distrib=newnd
+        self.marks['ratio']=0.5
+        for direct in ['pos', 'neg']:
+            self.marks[direct]['mean']=np.dot(newd[direct][:,0],newd[direct][:,1])
+            self.marks[direct]['std']=np.sqrt(
+                    np.dot(
+                        np.square(newd[direct][:,0]-self.marks[direct]['mean']),
+                        newd[direct][:,1])
+                    )
+            self.marks[direct]['absmin']=np.amin(distr[:,0])
+            self.marks[direct]['absmax']=np.amax(distr[:,0])
+            self.marks[direct]['numlevels']=len_
     def estimate_marksratio(self,):
         cdef int numpos= np.sum(self.data[:,1]>0)
         cdef int numneg=np.sum(self.data[:,1]<0)
@@ -246,7 +274,12 @@ class PointProcess:
         idxdelta=(deltas>0.0)
         cdef DTYPEf_t delta = np.amin(deltas[idxdelta])
         assert delta>0
-        cdef int levels = 1+int(np.exp(absmax-absmin)//delta)
+        cdef int levels = 0
+        try:
+            levels=1+int(np.exp(absmax-absmin)//delta)
+        except:
+            print("levels arbitrarily set to 1000")
+            levels=1000
         assert levels>0
         cdef np.ndarray[DTYPEf_t, ndim=2] distrib = np.zeros((levels,2),dtype=DTYPEf)
         cdef DTYPEf_t startval = exp(absmin) #starting point of the grid of prices
@@ -352,6 +385,8 @@ class OrnsteinUhlenbeck:
         cdef np.ndarray[DTYPEf_t, ndim=1] dt = np.diff(data[:,0])
         self.dt=dt
         self.data=data
+    def simmetrise(self,):
+        self.set_longterm_mean(0.0)
     def set_rate(self,DTYPEf_t rate):
         self.rate=rate
     def set_longterm_mean(self, DTYPEf_t mu):
@@ -401,6 +436,9 @@ class OrnsteinUhlenbeck:
         rate=self.convergence_rate
         cdef np.ndarray[DTYPEf_t, ndim=1] std=self.sigma*np.sqrt((1.0-np.exp(-2*rate*self.dt))/(2*rate))
         cdef np.ndarray[DTYPEf_t, ndim=1] dx = np.diff(self.data[:,1])
+        # An alternative definition of dx could be the following
+        #cdef np.ndarray[DTYPEf_t, ndim=1] dx = self.data[1:,1]-np.exp(-rate*self.dt)*self.data[:-1,1]
+        #Notice that with the alternative definition we need to modify the discrete distribution. This feature is not implemented yet
         idx = (np.abs(dx) >= caliber*std)
         cdef np.ndarray[DTYPEf_t, ndim=1] jumpsizes = np.array(dx[idx], dtype=DTYPEf)
         idx = np.array(np.concatenate([np.zeros((1,),dtype=np.bool),idx], axis=0),dtype=np.bool)

@@ -37,6 +37,7 @@ cdef struct DiffEqData:
     DTYPEf_t qT
     DTYPEf_t r0
     DTYPEf_t S0
+    DTYPEf_t t0
     DTYPEf_t terminal_time
     DTYPEf_t Ktilde
 
@@ -69,6 +70,9 @@ class Liquidator:
         self.coefficients=coefficients
     def set_priceprocess(self,priceprocess):
         self.priceprocess=copy.copy(priceprocess)
+    def store_simulated_liquidation(self):
+        ss=SimulatedLiquidation(self.simulations, self.priceprocess.simulations)
+        self.simulated_liquidation=ss
     def compute_initial_rate(self,np.ndarray[DTYPEf_t, ndim=2] expectedprice, DTYPEf_t liquidation_target=0.0, DTYPEf_t t1=-1.0):
         if t1<0.0:
             t1=self.horizon
@@ -82,6 +86,7 @@ class Liquidator:
         self.ODEdata['r0']=res
     def compute_Ktilde(self,np.ndarray[DTYPEf_t, ndim=2] expectedprice, DTYPEf_t t1):
         assert t1<=self.horizon
+        assert t1<=np.amax(expectedprice[:,0])
         idx=expectedprice[:,0]<=t1
         cdef np.ndarray[DTYPEf_t, ndim=1] forecast=expectedprice[idx,1]
         cdef np.ndarray[DTYPEf_t, ndim=1] grid=expectedprice[idx,0]
@@ -104,6 +109,7 @@ class Liquidator:
         if t1<=t0:
             t0=priceinfo[0,0]
             t1=self.horizon
+        self.ODEdata['t0']=t0
         idx=(priceinfo[:,0]>=t0)
         cdef np.ndarray[DTYPEf_t, ndim=2] price = np.array(priceinfo[idx,:], copy=True)
         self.set_initial_price(price[0,1])
@@ -111,10 +117,11 @@ class Liquidator:
         cdef np.ndarray[DTYPEf_t, ndim=2] expectedprice = np.array(forecast[idx,:],copy=True)
         self.compute_initial_rate(expectedprice, t1=t1)
         cdef np.ndarray[DTYPEf_t, ndim=2] traj = np.ones((len(price),3),dtype=DTYPEf)
-        traj[:,0]=np.array(price[:,0], copy=True)
+        traj[0,0]=t0
+        traj[1:,0]=np.array(price[1:,0],copy=True)
         traj[0,1]=self.ODEdata['q0']
         traj[0,2]=self.ODEdata['r0']
-        cdef np.ndarray[DTYPEf_t, ndim=1] dt = np.diff(price[:,0])
+        cdef np.ndarray[DTYPEf_t, ndim=1] dt = np.diff(traj[:,0])
         cdef np.ndarray[DTYPEf_t, ndim=1] dS = np.diff(price[:,1])
         cdef DTYPEf_t qT = self.ODEdata['qT']
         cdef DTYPEf_t c1tilde=2*self.coefficients['c1']**2, c3sq=self.coefficients['c3']**2
@@ -150,42 +157,120 @@ class Liquidator:
             axi=axp.twinx()
             axi.plot(traj[:,0], traj[:,1], label='inventory', color='darkred')
             axi.set_ylabel('inventory')
-            axp.legend()
-            axi.legend()
+            axp.legend(loc=3)
+            axi.legend(loc=6)
             axp=fig.add_subplot(212)
             axp.plot(price[:,0], price[:,1], label='price', color='blue')
             axp.plot(exprice[:,0], exprice[:,1], label='reversion_target', color='lightblue', linestyle='--', linewidth=3)
             axp.set_xlabel('time')
             axp.set_ylabel('price')
             axi=axp.twinx()
-            axi.plot(traj[:,0], traj[:,2], label='inventory_rate', color='darkred')
-            axi.set_ylabel('rate')
-            axp.legend()
-            axi.legend()
+            axi.plot(traj[:,0], np.abs(traj[:,2]), label='rate', color='darkred')
+            axi.set_ylabel('absolute rate')
+            axp.legend(loc=3)
+            axi.legend(loc=6)
         else:
             axi=fig.add_subplot(211)
             axi.plot(traj[:,0], traj[:,1], label='inventory', color='darkred')
             axi.set_xlabel('time')
             axi.set_ylabel('inventory')
             axi=fig.add_subplot(212)
-            axi.plot(traj[:,0], traj[:,2], label='inventory_rate', color='darkred')
+            axi.plot(traj[:,0], np.abs(traj[:,2]), label='rate', color='darkred')
             axi.set_xlabel('time')
-            axi.set_ylabel('rate')
-            axi.legend()
-            axi.legend()
+            axi.set_ylabel('absolute rate')
+            axi.legend(loc=6)
+        plt.suptitle('Execution in a limit order book', fontsize=18)
         plt.show()
-        
+    def simulate(self, DTYPEf_t t0, DTYPEf_t t1, initial_inventory=None, liquidation_target=None, int howmany=1, Py_ssize_t maxnum_events=10**7):
+        assert t0<t1
+        self.ODEdata['t0']=t0
+        if initial_inventory==None:
+            initial_inventory=self.ODEdata['q0']
+        else:
+            assert type(initial_inventory)==DTYPEf
+            self.ODEdata['q0']=initial_inventory
+        if liquidation_target==None:
+            liquidation_target=self.ODEdata['qT']
+        else:
+            assert type(liquidation_target)==DTYPEf
+            self.ODEdata['qT']=liquidation_target
+        forecast=np.array(self.priceprocess.expected_trajectory, copy=True)
+        idx=(forecast[:,0]>=t0)
+        cdef np.ndarray[DTYPEf_t, ndim=2] expectedprice=np.array(forecast[idx,:], copy=True)
+        self.compute_initial_rate(expectedprice, t1=t1)
+        self.priceprocess.simulate(t0=t0,t1=self.horizon,howmany=howmany)#Notice that the horizon of the simulation is self.horizon, possibly larger than the passed value t1
+        cdef list simulations = []
+        cdef np.ndarray[DTYPEf_t, ndim=2] traj = np.zeros((maxnum_events,3), dtype=DTYPEf)
+        traj[0,0]=self.ODEdata['t0']
+        traj[0,1]=self.ODEdata['q0']
+        traj[0,2]=self.ODEdata['r0']
+        cdef DTYPEf_t qT = self.ODEdata['qT']
+        cdef DTYPEf_t c1tilde=2*self.coefficients['c1']**2, c3sq=self.coefficients['c3']**2
+        cdef np.ndarray[DTYPEf_t, ndim=1] termination_times=np.zeros(howmany, dtype=DTYPEf)
+        cdef int n,N, k=0
+        cdef DTYPEf_t dt=0.0, T=0.0
+        for price in self.priceprocess.simulations:
+            N=len(price)-1
+            n=0
+            while n<N and traj[n,1]>qT:
+                traj[n+1,0]=price[n+1,0]
+                dt=traj[n+1,0]-traj[n,0]
+                traj[n+1,1]=traj[n,1]+traj[n,2]*dt
+                traj[n+1,2]=traj[n,2]\
+                        +c3sq*(traj[n,1]-qT)*dt - (price[n+1,1]-price[n,1])/c1tilde
+                n+=1
+            simulations.append(np.array(traj[:n,:],copy=True))
+            T=traj[n-1,0]
+            termination_times[k]=T
+            k+=1
+        SIMS={'termination_times':termination_times, 'trajectories':simulations}
+        self.simulations=SIMS
+  
 
-            
+
+class SimulatedLiquidation:
+    def __init__(self,simulations=None, prices=None):
+        if simulations!=None and prices!=None:
+            self.get_data(simulations, prices)
+    def get_data(self, simulations, prices):
+        print("storing data")
+        self.get_prices(prices)
+        self.simulations=copy.copy(simulations)
+        dfs=[]
+        for k in range(len(simulations['trajectories'])):
+            cols=['time', 'inventory_{}'.format(k), 'rate_{}'.format(k)]
+            dfs.append(pd.DataFrame(simulations['trajectories'][k],columns=cols))
+            if k==0:
+                df=dfs[0].copy()
+            else:
+                df=df.merge(dfs[k],how='outer',on='time')
+        self.simulations['dfs']=dfs
+        self.df_simul = df
+        self.store_terminationtimes()
+    def get_prices(self, prices):
+        print("storing prices")
+        self.prices=copy.copy(prices)
+        dfs=[]
+        for k in range(len(prices)):
+            cols=['time', 'price_{}'.format(k)]
+            dfs.append(pd.DataFrame(prices[k],columns=cols))
+            if k==0:
+                df=dfs[0].copy()
+            else:
+                df=df.merge(dfs[k],how='outer',on='time')
+        self.df_prices=df
+    def store_terminationtimes(self,):
+        print("storing termination times")
+        tt=self.simulations['termination_times']
+        df=pd.DataFrame({'simulation_id': np.arange(len(tt)),'termination':tt})
+        ott=np.array(df.sort_values(by='termination')['simulation_id'].values)
+        lstt=np.zeros(len(df), dtype=np.int)
+        l=len(ott)
+        lstt[1::2]=ott[:l-l//2-1:-1]
+        lstt[::2]=ott[:l//2+l%2]
+        df['plot_order']=lstt
+        self.simulations['df_termin']=df
 
 
 
 
-
-
-
-        
-
-
-        
-        
